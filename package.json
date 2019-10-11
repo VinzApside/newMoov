@@ -22,7 +22,8 @@
     "ng-bootstrap": "^1.6.3",
     "ngx-bootstrap": "^5.1.2",
     "ngx-toastr": "^11.1.0",
-    "rxjs": "~6.4.0",
+    "rxjs": "^6.4.0",
+    "rxjs-compat": "^6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

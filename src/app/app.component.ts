@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
   template: `
     <div class="full-height">
       <h1>New moovhub</h1>
-      <app-button-call></app-button-call>
+      <app-park></app-park>
     </div>
   `
 })
