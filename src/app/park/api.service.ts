@@ -11,29 +11,31 @@ export class ApiService {
   getData() {
     this.http.get("https://httpbin.org/get").subscribe(
       res => {
-        console.log(res);
+        console.log("res");
+        return "ok";
       },
       (err: HttpErrorResponse) => {
         console.log(err.error);
         console.log(err.name);
         console.log(err.message);
         console.log(err.status);
+        return "ko";
       }
     );
-    return "ok";
   }
   postData() {
     this.http.post("https://httpbin.org/post", "").subscribe(
       res => {
-        console.log(res);
+        console.log("res");
+        return "ok";
       },
       (err: HttpErrorResponse) => {
         console.log(err.error);
         console.log(err.name);
         console.log(err.message);
         console.log(err.status);
+        return "ko";
       }
     );
-    return "ok";
   }
 }

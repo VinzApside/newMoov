@@ -35,13 +35,20 @@ export class ParkComponent implements OnInit {
   constructor(private toastr: ToastrService, private apiService: ApiService) {
     this.buttonRight = "right";
     this.buttonWrong = "wrong";
-    this.responseApi = "";
+    this.responseApi = "wait for it";
   }
 
   ngOnInit() {}
 
   clickOnButton(type) {
-    this.responseApi = this.apiService.getData();
+    this.apiService
+      .getData()
+      .then(result => {
+        console.log("object");
+      })
+      .catch(err => {
+        console.log("error");
+      });
     console.log(this.responseApi);
     if (this.responseApi == "ok") {
       this.toastr.success(type, "success", { disableTimeOut: true });
