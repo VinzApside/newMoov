@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
+import { ToastrService } from "ngx-toastr";
+
 @Component({
   selector: "app-button-call",
   styleUrls: ["./button-call.component.scss"],
@@ -25,7 +27,8 @@ import { Component, OnInit } from "@angular/core";
 export class ButtonCallComponent implements OnInit {
   buttonRight: string;
   buttonWrong: string;
-  constructor() {
+
+  constructor(private toastr: ToastrService) {
     this.buttonRight = "right";
     this.buttonWrong = "wrong";
   }
@@ -33,6 +36,10 @@ export class ButtonCallComponent implements OnInit {
   ngOnInit() {}
 
   clickOnButton(type) {
-    console.log(`click ${type}`);
+    if (type == "right") {
+      this.toastr.success(type, "success", { disableTimeOut: true });
+    } else {
+      this.toastr.error(type, "success", { disableTimeOut: true });
+    }
   }
 }

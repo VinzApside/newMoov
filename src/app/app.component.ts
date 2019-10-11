@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.scss"],
   // templateUrl: "./app.component.html",
   template: `
-    <div>
+    <div class="full-height">
       <h1>New moovhub</h1>
       <app-button-call></app-button-call>
     </div>
