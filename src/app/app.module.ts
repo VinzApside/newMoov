@@ -14,6 +14,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
 import { ApiService } from "./park/api.service";
 
+//logger import
+import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
+
 @NgModule({
   declarations: [AppComponent, ParkComponent],
   imports: [
@@ -22,9 +25,14 @@ import { ApiService } from "./park/api.service";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    LoggerModule.forRoot({
+      serverLoggingUrl: "/api/logs",
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR
+    })
   ],
-  providers: [ApiService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

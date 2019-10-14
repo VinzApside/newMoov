@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { HttpErrorResponse } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { NGXLogger } from "ngx-logger";
+import { Observable, throwError } from "rxjs";
 import { map, tap, catchError } from "rxjs/operators";
 
 import { ToastrService } from "ngx-toastr";
@@ -13,7 +13,11 @@ export class ApiService {
   public httpOptions: {};
   public dataPost: {};
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private logger: NGXLogger
+  ) {
     this.httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -31,7 +35,7 @@ export class ApiService {
 
   public handleError(err) {
     this.toastr.error(JSON.stringify(err.statusText), err.name);
-    return err;
+    return throwError(err);
   }
 
   getData(): Observable<any> {

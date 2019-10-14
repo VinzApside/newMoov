@@ -29,7 +29,7 @@ import { subscribeOn } from "rxjs/operators";
   `
 })
 export class ParkComponent implements OnInit {
-  responseApi: string;
+  responseApi: object | string;
   buttonRight: string;
   buttonWrong: string;
 
