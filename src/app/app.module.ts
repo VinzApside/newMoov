@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 //http import
 import { HttpClientModule } from "@angular/common/http";
+import { ApiService } from "./park/api.service";
 
 @NgModule({
   declarations: [AppComponent, ParkComponent],
@@ -23,7 +24,7 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

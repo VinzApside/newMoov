@@ -6,11 +6,11 @@ import { Component } from "@angular/core";
   // templateUrl: "./app.component.html",
   template: `
     <div class="full-height">
-      <h1>New moovhub</h1>
+      <h1>{{ title }}</h1>
       <app-park></app-park>
     </div>
   `
 })
 export class AppComponent {
-  title = "New moovhub";
+  title = "My new project";
 }

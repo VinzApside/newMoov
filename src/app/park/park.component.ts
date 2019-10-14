@@ -4,6 +4,7 @@ import { ToastrService } from "ngx-toastr";
 
 import { ApiService } from "./api.service";
 import { Observable } from "rxjs";
+import { subscribeOn } from "rxjs/operators";
 
 @Component({
   selector: "app-park",
@@ -35,25 +36,26 @@ export class ParkComponent implements OnInit {
   constructor(private toastr: ToastrService, private apiService: ApiService) {
     this.buttonRight = "right";
     this.buttonWrong = "wrong";
-    this.responseApi = "wait for it";
   }
 
   ngOnInit() {}
 
   clickOnButton(type) {
-    this.apiService
-      .getData()
-      .then(result => {
-        console.log("object");
-      })
-      .catch(err => {
-        console.log("error");
-      });
-    console.log(this.responseApi);
-    if (this.responseApi == "ok") {
-      this.toastr.success(type, "success", { disableTimeOut: true });
+    if (type === "right") {
+      this.apiService.postData().subscribe(res =>
+        this.toastr.success(JSON.stringify(res), "success", {
+          disableTimeOut: true
+        })
+      );
     } else {
-      this.toastr.error(type, "error", { disableTimeOut: true });
+      this.apiService.getData().subscribe(
+        res => {
+          this.toastr.success(JSON.stringify(res), "success", {
+            disableTimeOut: true
+          });
+        },
+        error => console.log(error)
+      );
     }
   }
 }
