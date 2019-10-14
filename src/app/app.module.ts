@@ -11,11 +11,12 @@ import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 //http import
-import { HttpClientModule } from "@angular/common/http";
-import { ApiService } from "./park/api.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { ApiService } from "./api/api.service";
 
 //logger import
 import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
+import { MyInterceptor } from "./api/interceptor";
 
 @NgModule({
   declarations: [AppComponent, ParkComponent],
@@ -32,7 +33,9 @@ import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
       serverLogLevel: NgxLoggerLevel.ERROR
     })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,0 +1,12 @@
+{
+  "env": {
+    "name": "dev"
+  },
+  "logging": {
+    "console": true
+  },
+  "api": {
+    "moovhubBackUrl": "http://localhost:3000",
+    "moovhubBookingAvailability": "/booking/availability/park/"
+  }
+}

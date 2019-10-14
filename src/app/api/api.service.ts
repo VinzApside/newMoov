@@ -1,5 +1,11 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpRequest,
+  HttpEvent,
+  HttpEventType
+} from "@angular/common/http";
 import { NGXLogger } from "ngx-logger";
 import { Observable, throwError } from "rxjs";
 import { map, tap, catchError } from "rxjs/operators";
@@ -21,7 +27,8 @@ export class ApiService {
     this.httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
-      })
+      }),
+      reportProgess: true
     };
     this.dataPost = {
       beginDate: "2019-11-01T11:36:02.836Z",
@@ -38,20 +45,17 @@ export class ApiService {
     return throwError(err);
   }
 
-  getData(): Observable<any> {
+  getData(urlGet): Observable<any> {
+    const req = new HttpRequest("GET", urlGet, this.httpOptions);
     return this.http
-      .get("http://localhost:3000/booking/availability/park/")
+      .get(urlGet)
       .pipe(map((response: Object[]) => response))
       .pipe(catchError(this.handleError.bind(this)));
   }
 
-  postData(): Observable<any> {
+  postData(urlPost): Observable<any> {
     return this.http
-      .post(
-        "http://localhost:3000/booking/availability/park/",
-        this.dataPost,
-        this.httpOptions
-      )
+      .post(urlPost, this.dataPost, this.httpOptions)
       .pipe(map((response: Object[]) => response))
       .pipe(catchError(this.handleError));
   }
