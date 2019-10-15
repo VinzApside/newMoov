@@ -7,6 +7,7 @@ import { Component } from "@angular/core";
   template: `
     <div class="full-height">
       <h1>{{ title }}</h1>
+      <app-link></app-link>
       <router-outlet></router-outlet>
     </div>
   `

@@ -25,6 +25,7 @@ import { HomeModule } from "./module/home/home.module";
 import { NotFoundModule } from "./module/notfound/notfound.module";
 import { AboutModule } from "./module/about/about.module";
 import { HelpModule } from "./module/help/help.module";
+import { LinkModule } from "./module/link/link.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { HelpModule } from "./module/help/help.module";
     NotFoundModule,
     HelpModule,
     HttpClientModule,
+    LinkModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
