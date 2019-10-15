@@ -1,0 +1,21 @@
+<div *ngFor="let park of apiResponse">
+  <li>
+    {{ park.id_park }} (type: {{ park.origin }}) => {{ park.price }} euros
+  </li>
+</div>
+<div>
+  <button
+    (click)="clickOnButton(buttonRight)"
+    type="button"
+    class="button right"
+  >
+    {{ buttonRight }}
+  </button>
+  <button
+    (click)="clickOnButton(buttonWrong)"
+    type="button"
+    class="button wrong"
+  >
+    {{ buttonWrong }}
+  </button>
+</div>

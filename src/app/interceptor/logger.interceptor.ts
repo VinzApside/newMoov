@@ -11,10 +11,14 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/do";
 
 import { NGXLogger } from "ngx-logger";
+import { errorInterceptor } from "./error.interceptor";
 
 @Injectable()
-export class MyInterceptor implements HttpInterceptor {
-  constructor(private logger: NGXLogger) {}
+export class loggerInterceptor implements HttpInterceptor {
+  constructor(
+    public logger: NGXLogger,
+    private errorInterceptor: errorInterceptor
+  ) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -27,7 +31,7 @@ export class MyInterceptor implements HttpInterceptor {
         }
       },
       err => {
-        this.logger.error(req.url, "---> response status:", err.status);
+        this.errorInterceptor.toastError(err);
       }
     );
   }

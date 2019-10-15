@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { ParkComponent } from "./park/park.component";
+import { ParkComponent } from "./module/park/park.component";
 
 //toastr import
 import { ToastrModule } from "ngx-toastr";
@@ -12,15 +12,28 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 //http import
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { ApiService } from "./api/api.service";
+import { ApiService } from "./module/api/api.service";
 
 //logger import
 import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
-import { MyInterceptor } from "./api/interceptor";
+
+import { loggerInterceptor } from "./interceptor/logger.interceptor";
+import { errorInterceptor } from "./interceptor/error.interceptor";
+
+import { ParkModule } from "./module/park/park.module";
+import { HomeModule } from "./module/home/home.module";
+import { NotFoundModule } from "./module/notfound/notfound.module";
+import { AboutModule } from "./module/about/about.module";
+import { HelpModule } from "./module/help/help.module";
 
 @NgModule({
-  declarations: [AppComponent, ParkComponent],
+  declarations: [AppComponent],
   imports: [
+    HomeModule,
+    ParkModule,
+    AboutModule,
+    NotFoundModule,
+    HelpModule,
     HttpClientModule,
     CommonModule,
     BrowserModule,
@@ -34,7 +47,8 @@ import { MyInterceptor } from "./api/interceptor";
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: loggerInterceptor, multi: true },
+    errorInterceptor
   ],
   bootstrap: [AppComponent]
 })
