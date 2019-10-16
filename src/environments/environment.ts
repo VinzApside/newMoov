@@ -3,7 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  Api: {
+    urlFront: "http://localhost:4200",
+    mainMoovhub: "http://localhost:3000"
+  },
+  MoovhubEndpointBack: {
+    freeplacePark: "/booking/availability/park/"
+  },
+  MoovhubEndpointFront: {
+    accueil: "/",
+    recherche: "/recherche",
+    apropos: "/a-propos",
+    aide: "/aide"
+  }
 };
 
 /*

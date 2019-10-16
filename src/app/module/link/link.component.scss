@@ -1,0 +1,8 @@
+a {
+  &:focus {
+    color: red;
+  }
+  &.active {
+    color: red;
+  }
+}

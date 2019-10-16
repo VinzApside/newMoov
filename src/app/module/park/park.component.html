@@ -1,25 +1,15 @@
 <div class="d-flex justify-content-center">
-  <div>
-    <button
-      (click)="clickOnButton(buttonRight)"
-      type="button"
-      class="btn btn-success"
-    >
-      {{ buttonRight }}
-    </button>
-    <button
-      (click)="clickOnButton(buttonWrong)"
-      type="button"
-      class="btn btn-danger"
-    >
-      {{ buttonWrong }}
-    </button>
-  </div>
+    <div>
+        <button (click)="clickOnButton(buttonRight)" type="button" class="btn btn-success">
+            {{ buttonRight }}
+        </button>
+        <button (click)="clickOnButton(buttonWrong)" type="button" class="btn btn-danger">
+            {{ buttonWrong }}
+        </button>
+    </div>
 </div>
 <div class="d-flex justify-content-center">
-  <div *ngFor="let park of apiResponse">
-    <li>
-      {{ park.id_park }} (type: {{ park.origin }}) => {{ park.price }} euros
-    </li>
-  </div>
+    <div *ngFor="let park of apiResponse">
+        <li>{{ park.id_park }} (type: {{ park.origin }}) => {{ park.price }} euros</li>
+    </div>
 </div>
