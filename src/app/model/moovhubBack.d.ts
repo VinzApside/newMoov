@@ -1,4 +1,4 @@
-interface freeplaceParkBody {
+export interface freeplaceParkBody {
     beginDate: string;
     endDate: string;
     id_park: string;
@@ -7,7 +7,7 @@ interface freeplaceParkBody {
     vehicleTypes: string[];
 }
 
-interface freeplaceParkResponse {
+export interface freeplaceParkResponse {
     availability: number;
     id_park: string;
     id_park_source: string;

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { ApiService } from '../api/api.service';
+import { ApiService } from '../../core/api/api.service';
 
 import { environment as E } from '../../../environments/environment';
+import { freeplaceParkBody, freeplaceParkResponse } from '../../model/moovhubBack';
 
 @Component({
     selector: 'app-park',
