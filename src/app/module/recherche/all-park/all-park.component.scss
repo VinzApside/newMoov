@@ -1,0 +1,13 @@
+.li-style {
+    position: relative;
+}
+.button-style {
+    position: absolute;
+    right: 5px;
+    min-width: 15%;
+}
+
+.inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}

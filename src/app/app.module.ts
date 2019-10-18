@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ParkComponent } from './module/park/park.component';
+import { RechercheComponent } from './module/recherche/recherche.component';
 
 //toastr import
 import { ToastrModule } from 'ngx-toastr';
@@ -17,10 +17,10 @@ import { ApiService } from './core/api/api.service';
 //logger import
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
-import { loggerInterceptor } from './interceptor/logger.interceptor';
-import { errorInterceptor } from './interceptor/error.interceptor';
+import { loggerInterceptor } from './core/interceptor/logger.interceptor';
+import { errorInterceptor } from './core/interceptor/error.interceptor';
 
-import { ParkModule } from './module/park/park.module';
+import { RechercheModule } from './module/recherche/recherche.module';
 import { HomeModule } from './module/home/home.module';
 import { NotFoundModule } from './module/notfound/notfound.module';
 import { AboutModule } from './module/about/about.module';
@@ -33,7 +33,7 @@ import { CoreModule } from './core/core.module';
     imports: [
         CoreModule,
         HomeModule,
-        ParkModule,
+        RechercheModule,
         AboutModule,
         NotFoundModule,
         HelpModule,

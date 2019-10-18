@@ -9,7 +9,8 @@ export const environment = {
         mainMoovhub: 'http://localhost:3000'
     },
     MoovhubEndpointBack: {
-        freeplacePark: '/booking/availability/park/'
+        freeplacePark: '/booking/availability/park/',
+        getAllPark: '/park/freeplaces/'
     },
     MoovhubEndpointFront: {
         accueil: '/',

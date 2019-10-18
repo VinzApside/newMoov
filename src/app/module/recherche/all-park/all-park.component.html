@@ -1,0 +1,16 @@
+<div>
+    <h2>Disponibilité immédiate</h2>
+    <ul class="list-group" *ngFor="let park of parksFreeplaces">
+        <li class="list-group-item list-group-item-action li-style">
+            {{ park.id_park }} :
+            <a
+                [className]="park.availability > 0 ? 'stretched-link' : 'inactiveLink'"
+                [routerLink]="['/aide', park.id_park]"
+                >{{ park.availability > 0 ? ' Reserver maintenant' : ' Temporairement non disponible' }}
+            </a>
+            <span class="badge badge-primary badge-pill button-style"
+                >{{ park.availability }} {{ park.availability > 1 ? 'places disponibles' : 'place disponible' }}</span
+            >
+        </li>
+    </ul>
+</div>
