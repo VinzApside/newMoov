@@ -1,9 +1,9 @@
 <ul class="nav justify-content-center">
-  <div *ngFor="let navlink of linkList">
-    <li class="nav-item">
-      <a class="nav-link" href="http://localhost:4200{{ navlink.href }}">
-        {{ navlink.name }}
-      </a>
-    </li>
-  </div>
+    <div *ngFor="let navlink of linkList">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="navlink.path">
+                {{ navlink.name }}
+            </a>
+        </li>
+    </div>
 </ul>
