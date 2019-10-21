@@ -30,10 +30,12 @@ import { AboutModule } from './module/about/about.module';
 import { HelpModule } from './module/help/help.module';
 import { LinkModule } from './module/link/link.module';
 import { CoreModule } from './core/core.module';
-import { LoginComponent } from './module/login/login.component';
+import { MymodalComponent } from './module/mymodalcomponent/mymodal.component';
+import { LoginComponent } from './module/mymodalcomponent/login/login.component';
+import { InscriptionComponent } from './module/mymodalcomponent/inscription/inscription.component';
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent],
+    declarations: [AppComponent, MymodalComponent, LoginComponent, InscriptionComponent],
     imports: [
         NgbModule,
         CoreModule,
@@ -55,6 +57,7 @@ import { LoginComponent } from './module/login/login.component';
             serverLogLevel: NgxLoggerLevel.ERROR
         })
     ],
+    entryComponents: [MymodalComponent],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: loggerInterceptor, multi: true }, errorInterceptor],
     bootstrap: [AppComponent]
 })
