@@ -14,6 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from './core/api/api.service';
 
+//bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 //logger import
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
@@ -27,10 +30,12 @@ import { AboutModule } from './module/about/about.module';
 import { HelpModule } from './module/help/help.module';
 import { LinkModule } from './module/link/link.module';
 import { CoreModule } from './core/core.module';
+import { LoginComponent } from './module/login/login.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, LoginComponent],
     imports: [
+        NgbModule,
         CoreModule,
         HomeModule,
         RechercheModule,

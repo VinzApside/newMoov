@@ -1,13 +1,28 @@
 .li-style {
     position: relative;
+    // min-height: 22%;
 }
-.button-style {
+.disponibility-style {
     position: absolute;
     right: 5px;
-    min-width: 15%;
+    min-width: 22%;
+    background: linear-gradient(to right, darkblue, blue, darkblue);
 }
 
 .inactiveLink {
     pointer-events: none;
     cursor: default;
+    color: red;
+}
+
+.fa-parking {
+    color: blue;
+    margin-right: 15px;
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }

@@ -6,7 +6,8 @@ export const environment = {
     },
     MoovhubEndpointBack: {
         freeplacePark: '/booking/availability/park/',
-        getAllPark: '/park/freeplaces/'
+        getAllPark: '/park/freeplaces/',
+        getParkData: '/park/'
     },
     MoovhubEndpointFront: {
         accueil: '/',

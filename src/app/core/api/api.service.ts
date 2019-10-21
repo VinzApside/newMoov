@@ -14,7 +14,8 @@ export class ApiService {
     constructor(private http: HttpClient, private logger: NGXLogger) {
         this.httpOptions = {
             headers: new HttpHeaders({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-partner-token': 'test_dev'
             }),
             reportProgess: true
         };
