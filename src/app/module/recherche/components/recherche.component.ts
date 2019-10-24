@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 
 import * as fromRecherche from '../store/actions/index';
 import { parksDataResponse } from 'types/lib';
+import { allParksService } from '../service/allparks.service';
 
 @Component({
     selector: 'app-recherche',
@@ -16,18 +17,22 @@ import { parksDataResponse } from 'types/lib';
     templateUrl: `./recherche.component.html`
 })
 export class RechercheComponent implements OnInit {
-    parks$: Observable<parksDataResponse[]>;
+    getParkData: Observable<{}>;
+    parks$: Observable<{}>;
+    parkLoading$: Observable<boolean>;
+    parkLoaded$: Observable<boolean>;
 
-    constructor(
-        private toastr: ToastrService,
-        private apiService: ApiService,
-        private store: Store<parksDataResponse[]>
-    ) {
-        this.parks$ = store.pipe(select('recherche'));
-    }
+    constructor(private toastr: ToastrService, private apsService: allParksService, private store: Store<any>) {}
 
     ngOnInit() {
-        this.store.dispatch(new fromRecherche.LoadParks());
+        this.getParkData = this.apsService.getParks();
+
+        this.store.dispatch(new fromRecherche.LoadParks(this.getParkData));
+        this.store.pipe(select('app-recherche')).subscribe((data) => {
+            // this.parks$ = data.parkList;
+            this.parkLoading$ = data.loading;
+            this.parkLoaded$ = data.loaded;
+        });
     }
 
     dataForBooking(data) {

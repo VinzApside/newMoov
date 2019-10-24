@@ -12,9 +12,7 @@ export class MymodalComponent implements OnInit {
     @Input() my_modal_type;
     constructor(public activeModal: NgbActiveModal) {}
 
-    ngOnInit() {
-        console.log(this.my_modal_type);
-    }
+    ngOnInit() {}
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';

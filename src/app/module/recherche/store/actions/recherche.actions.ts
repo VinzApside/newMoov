@@ -7,6 +7,7 @@ export const LOAD_PARKS_SUCCESS = '[Products] Load Parks Success';
 
 export class LoadParks implements Action {
     readonly type = LOAD_PARKS;
+    constructor(public payload: {}) {}
 }
 
 export class LoadParksFail implements Action {

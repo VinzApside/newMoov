@@ -23,32 +23,16 @@ export class AllParkComponent implements OnInit {
 
     ngOnInit() {
         this.visibleDescription = false;
-        this.apiService.getData(this.urlParkData).subscribe((res) => {
-            this.parksGeneralData = res;
-            this.apiService.getData(this.urlFreeplaces).subscribe(
-                (res) => {
-                    this.parksFreeplaces = res;
-                    this.concatParksDataAndAvailability();
-                },
-                (err) => console.log('+++')
-            );
-        });
-    }
-
-    concatParksDataAndAvailability() {
-        this.parksConcatData = [];
-        this.parksGeneralData.map((park) => {
-            park.showDescription = true;
-            if (park.status === 'active') {
-                const thatParkFreeData = this.parksFreeplaces.find(
-                    (parkFreeData) => parkFreeData.id_park_source === park.id_park_source
-                );
-                let parkNewData = Object.assign(thatParkFreeData, park);
-                this.parksConcatData.push(parkNewData);
-            } else {
-                this.parksConcatData.push(park);
-            }
-        });
+        // this.apiService.getData(this.urlParkData).subscribe((res) => {
+        //     this.parksGeneralData = res;
+        //     this.apiService.getData(this.urlFreeplaces).subscribe(
+        //         (res) => {
+        //             this.parksFreeplaces = res;
+        //             this.concatParksDataAndAvailability();
+        //         },
+        //         (err) => console.log('+++')
+        //     );
+        // });
     }
 
     changeVisibility(event, id_park_source) {
