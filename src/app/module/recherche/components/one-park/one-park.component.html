@@ -1,0 +1,31 @@
+<div class="container" (click)="changeVisibility($event, parkDetails.id_park_source)">
+    <div class="row">
+        <div class="col-4">
+            <i class="fas fa-parking"></i>
+            {{ parkDetails.name }}
+        </div>
+        <div class="col-4">
+            <button
+                (click)="userWantToBookEvent($event, parkDetails)"
+                *ngIf="parkDetails.origin === 'ZP'"
+                type="button"
+                class="btn btn-success"
+                [disabled]="!parkDetails.availability > 0"
+            >
+                {{ parkDetails.availability > 0 ? ' Reserver maintenant' : ' Temporairement non disponible' }}
+            </button>
+        </div>
+        <div class="col-4">
+            <span class="badge badge-primary disponibility-style">
+                {{ parkDetails.availability }}
+                {{ parkDetails.availability > 1 ? ' places disponibles ' : ' place disponible ' }}
+                {{ parkDetails.capacityMax ? ' / ' + parkDetails.capacityMax + ' places possibles' : '' }}</span
+            >
+        </div>
+    </div>
+    <br />
+    <div [hidden]="parkDetails.showDescription" class="row">
+        <p>Situation : {{ parkDetails.address }}</p>
+        <div [innerHTML]="parkDetails.description"></div>
+    </div>
+</div>

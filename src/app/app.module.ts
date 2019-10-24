@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RechercheComponent } from './module/recherche/recherche.component';
+import { RechercheComponent } from './module/recherche/components/recherche.component';
 
 //toastr import
 import { ToastrModule } from 'ngx-toastr';
@@ -34,6 +34,8 @@ import { MymodalComponent } from './module/mymodalcomponent/mymodal.component';
 import { LoginComponent } from './module/mymodalcomponent/login/login.component';
 import { InscriptionComponent } from './module/mymodalcomponent/inscription/inscription.component';
 
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
     declarations: [AppComponent, MymodalComponent, LoginComponent, InscriptionComponent],
     imports: [
@@ -55,7 +57,8 @@ import { InscriptionComponent } from './module/mymodalcomponent/inscription/insc
             serverLoggingUrl: '/api/logs',
             level: NgxLoggerLevel.DEBUG,
             serverLogLevel: NgxLoggerLevel.ERROR
-        })
+        }),
+        StoreModule.forRoot({})
     ],
     entryComponents: [MymodalComponent],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: loggerInterceptor, multi: true }, errorInterceptor],

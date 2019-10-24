@@ -1,0 +1,19 @@
+<div>
+    <h2>Disponibilité immédiate</h2>
+    <div *ngIf="parksConcatData; else noData">
+        <app-one-park
+            *ngFor="let park of parksConcatData"
+            [parkDetails]="park"
+            (sendDataParkToBooking)="getTheParkDetailsForBooking($event)"
+        ></app-one-park>
+    </div>
+    <ng-template #noData>
+        <br />
+        <h4>
+            Les informations sont temporairement indisponibles, nous faisons en sorte de rétablir cela le plus vite
+            possible.
+        </h4>
+        <br />
+        <img class="img-center" src="http://pluspng.com/img-png/come-back-png--631.png" alt="Come Back PNG" />
+    </ng-template>
+</div>

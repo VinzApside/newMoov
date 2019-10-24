@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/core/api/api.service';
 import { environment as E } from 'src/environments/environment.prod';
 import { freeplaceParkResponse, parksDataResponse } from 'src/app/model/moovhubBack';
@@ -15,6 +15,9 @@ export class AllParkComponent implements OnInit {
     urlFreeplaces: string = `${E.Api.mainMoovhub}${E.MoovhubEndpointBack.getAllPark}`;
     urlParkData: string = `${E.Api.mainMoovhub}${E.MoovhubEndpointBack.getParkData}`;
     visibleDescription: boolean;
+
+    @Output()
+    sendParkForBooking = new EventEmitter<any>();
 
     constructor(private apiService: ApiService) {}
 
@@ -56,5 +59,9 @@ export class AllParkComponent implements OnInit {
                 }
             });
         }
+    }
+
+    getTheParkDetailsForBooking(data) {
+        this.sendParkForBooking.emit(data);
     }
 }
