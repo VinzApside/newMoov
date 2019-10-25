@@ -4,29 +4,39 @@ import { freeplaceParkResponse } from 'src/app/model/moovhubBack';
 import { parksDataResponse } from 'types/lib';
 import { environment as E } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AllParksService {
-    parksConcatData: {}[] = [];
+    parksConcatData$: {}[] = [];
 
     urlFreeplaces: string = `${E.Api.mainMoovhub}${E.MoovhubEndpointBack.getAllPark}`;
     urlParkData: string = `${E.Api.mainMoovhub}${E.MoovhubEndpointBack.getParkData}`;
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'x-partner-token': 'test_dev'
+        }),
+        reportProgess: true
+    };
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService, private http: HttpClient) {}
+    // return this.apiService.getData(this.urlFreeplaces).subscribe(
+    //     (parkFreeplacesData) => {
+    //         return this.concatParksDataAndAvailability(parkMainData, parkFreeplacesData);
+    //     },
+    //     (err) => console.log('+++')
+    // );
 
-    getParks(): any {
-        return this.apiService.getData(this.urlParkData).subscribe((parkMainData) => {
-            return this.apiService.getData(this.urlFreeplaces).subscribe(
-                (parkFreeplacesData) => {
-                    return this.concatParksDataAndAvailability(parkMainData, parkFreeplacesData);
-                },
-                (err) => console.log('+++')
-            );
-        });
+    getParks(): Observable<parksDataResponse> {
+        return this.http.get<parksDataResponse>(this.urlParkData, this.httpOptions);
     }
 
     getFreePlaces(): Observable<freeplaceParkResponse> {
-        return this.apiService.getData(this.urlFreeplaces);
+        return this.http.get<freeplaceParkResponse>(this.urlFreeplaces, this.httpOptions);
     }
 
     concatParksDataAndAvailability(parksGeneralData: parksDataResponse[], parksFreeplaces: freeplaceParkResponse[]) {
@@ -44,5 +54,25 @@ export class AllParksService {
             }
         });
         return parksAllDataConcat;
+    }
+
+    getAllData(): Observable<any> {
+        return forkJoin(this.getFreePlaces(), this.getParks()).pipe(
+            map(([parksGeneralData, parksFreeplaces]) => {
+                const parksAllDataConcat = [];
+                for (const park of parksGeneralData) {
+                    if (park.status === 'active') {
+                        const thatParkFreeData = parksFreeplaces.find(
+                            (parkFreeData) => parkFreeData.id_park_source === park.id_park_source
+                        );
+                        let parkNewData = Object.assign(thatParkFreeData, park);
+                        parksAllDataConcat.push(parkNewData);
+                    } else {
+                        parksAllDataConcat.push(park);
+                    }
+                }
+                return parksAllDataConcat;
+            })
+        );
     }
 }

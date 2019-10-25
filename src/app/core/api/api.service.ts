@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpEvent, HttpEventType } from '
 import { NGXLogger } from 'ngx-logger';
 import { Observable, throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
+import { parksDataResponse } from 'types/lib';
 
 @Injectable({
     providedIn: 'root'
@@ -26,11 +27,8 @@ export class ApiService {
         return throwError(err);
     }
 
-    getData(urlGet): Observable<any> {
-        return this.http
-            .get(urlGet, this.httpOptions)
-            .pipe(map((response: Object[]) => response))
-            .pipe(catchError(this.handleError.bind(this)));
+    getDataParks(urlGet): Observable<parksDataResponse[]> {
+        return this.http.get<parksDataResponse[]>(urlGet, this.httpOptions);
     }
 
     postData(urlPost, bodyPost): Observable<any> {

@@ -2,6 +2,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from 'src/app/core/api/api.service';
 import { environment as E } from 'src/environments/environment.prod';
 import { freeplaceParkResponse, parksDataResponse } from 'src/app/model/moovhubBack';
+import { RechercheState } from '../../store/state/recherche.state';
+import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
 
 @Component({
     selector: 'app-all-park',
@@ -11,7 +14,7 @@ import { freeplaceParkResponse, parksDataResponse } from 'src/app/model/moovhubB
 export class AllParkComponent implements OnInit {
     parksFreeplaces: freeplaceParkResponse[];
     parksGeneralData: parksDataResponse[] = [];
-    parksConcatData: {}[];
+    // parksConcatData$: {}[];
     urlFreeplaces: string = `${E.Api.mainMoovhub}${E.MoovhubEndpointBack.getAllPark}`;
     urlParkData: string = `${E.Api.mainMoovhub}${E.MoovhubEndpointBack.getParkData}`;
     visibleDescription: boolean;
@@ -19,10 +22,13 @@ export class AllParkComponent implements OnInit {
     @Output()
     sendParkForBooking = new EventEmitter<any>();
 
+    @Select(RechercheState.getAllParks) parksConcatData$: Observable<parksDataResponse[]>;
+
     constructor(private apiService: ApiService) {}
 
     ngOnInit() {
         this.visibleDescription = false;
+
         // this.apiService.getData(this.urlParkData).subscribe((res) => {
         //     this.parksGeneralData = res;
         //     this.apiService.getData(this.urlFreeplaces).subscribe(
@@ -35,15 +41,15 @@ export class AllParkComponent implements OnInit {
         // });
     }
 
-    changeVisibility(event, id_park_source) {
-        if (!event.target.attributes.attChangeVisibility) {
-            this.parksConcatData.map((park: parksDataResponse) => {
-                if (park.id_park_source === id_park_source) {
-                    park.showDescription = !park.showDescription;
-                }
-            });
-        }
-    }
+    // changeVisibility(event, id_park_source) {
+    //     if (!event.target.attributes.attChangeVisibility) {
+    //         this.parksConcatData$.map((park: parksDataResponse) => {
+    //             if (park.id_park_source === id_park_source) {
+    //                 park.showDescription = !park.showDescription;
+    //             }
+    //         });
+    //     }
+    // }
 
     getTheParkDetailsForBooking(data) {
         this.sendParkForBooking.emit(data);
