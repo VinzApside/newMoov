@@ -6,7 +6,7 @@ import { environment as E } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class allParksService {
+export class AllParksService {
     parksConcatData: {}[] = [];
 
     urlFreeplaces: string = `${E.Api.mainMoovhub}${E.MoovhubEndpointBack.getAllPark}`;
