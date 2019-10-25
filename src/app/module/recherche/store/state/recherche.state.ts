@@ -1,20 +1,23 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { GetParks } from '../actions/recherche.actions';
+import { InitialiseParks } from '../actions/recherche.actions';
 import { AllParksService } from '../../service/allparks.service';
 import { tap } from 'rxjs/operators';
 import { state } from '@angular/animations';
+import { parksDataResponse } from 'src/app/model/moovhubBack';
 
 export class RechercheStateModel {
     loading: boolean;
     loaded: boolean;
-    parks: [];
+    parks: any;
+    freeplaces: any;
 }
 @State<RechercheStateModel>({
     name: 'allParks',
     defaults: {
         loading: false,
         loaded: false,
-        parks: []
+        parks: [],
+        freeplaces: []
     }
 })
 export class RechercheState {
@@ -30,8 +33,20 @@ export class RechercheState {
         return { loaded: state.loaded, loading: state.loading };
     }
 
-    @Action(GetParks)
-    getParks(state: StateContext<RechercheStateModel>) {
-        return this.allParksService.getParks().pipe(tap((result) => state.setState({ ...state, loaded: true })));
+    @Action(InitialiseParks)
+    initialiseParks({ getState, setState }: StateContext<RechercheStateModel>) {
+        // const state = ctx.getState();
+
+        // return this.allParksService.getParks().pipe(tap((result) => ctx.setState({ ...state, loaded: true })));
+        return this.allParksService.getAllData().pipe(
+            tap((result) => {
+                const state = getState();
+                setState({
+                    ...state,
+                    loaded: true,
+                    parks: result
+                });
+            })
+        );
     }
 }

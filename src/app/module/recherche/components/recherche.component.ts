@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { parksDataResponse } from 'types/lib';
 import { AllParksService } from '../service/allparks.service';
-import { GetParks } from '../store/actions/recherche.actions';
+import { InitialiseParks } from '../store/actions/recherche.actions';
+import { RechercheState } from '../store/state/recherche.state';
 
 @Component({
     selector: 'app-recherche',
@@ -15,16 +16,14 @@ import { GetParks } from '../store/actions/recherche.actions';
 })
 export class RechercheComponent implements OnInit {
     getParkData: Observable<{}>;
-    parks$: Observable<{}>;
     parkLoading$: Observable<boolean>;
     parkLoaded$: Observable<boolean>;
 
     constructor(private store: Store, private toastr: ToastrService, private rechercheService: AllParksService) {}
 
     ngOnInit() {
-        this.getParkData = this.rechercheService.getParks().subscribe((rs) => console.log('rs'));
-        console.log(this.getParkData);
-        // this.store.dispatch(new GetParks());
+        // this.rechercheService.getParks().subscribe((rs) => console.log('rs', rs));
+        this.store.dispatch(new InitialiseParks());
     }
 
     dataForBooking(data) {

@@ -1,5 +1,5 @@
-export class GetParks {
-    static readonly type = '[Recherche] Get Parks';
+export class InitialiseParks {
+    static readonly type = '[Recherche] Initialise Parks';
 }
 
 export class GetStatus {
