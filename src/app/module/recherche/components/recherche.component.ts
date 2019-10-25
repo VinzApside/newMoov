@@ -7,7 +7,6 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import * as fromRecherche from '../store/actions/index';
 import { parksDataResponse } from 'types/lib';
 import { allParksService } from '../service/allparks.service';
 
@@ -27,7 +26,6 @@ export class RechercheComponent implements OnInit {
     ngOnInit() {
         this.getParkData = this.apsService.getParks();
 
-        this.store.dispatch(new fromRecherche.LoadParks(this.getParkData));
         this.store.pipe(select('app-recherche')).subscribe((data) => {
             // this.parks$ = data.parkList;
             this.parkLoading$ = data.loading;

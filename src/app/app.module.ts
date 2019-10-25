@@ -34,7 +34,9 @@ import { MymodalComponent } from './module/mymodalcomponent/mymodal.component';
 import { LoginComponent } from './module/mymodalcomponent/login/login.component';
 import { InscriptionComponent } from './module/mymodalcomponent/inscription/inscription.component';
 
-import { StoreModule } from '@ngrx/store';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 @NgModule({
     declarations: [AppComponent, MymodalComponent, LoginComponent, InscriptionComponent],
@@ -58,7 +60,9 @@ import { StoreModule } from '@ngrx/store';
             level: NgxLoggerLevel.DEBUG,
             serverLogLevel: NgxLoggerLevel.ERROR
         }),
-        StoreModule.forRoot({})
+        NgxsModule.forRoot(),
+        NgxsReduxDevtoolsPluginModule.forRoot(),
+        NgxsLoggerPluginModule.forRoot()
     ],
     entryComponents: [MymodalComponent],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: loggerInterceptor, multi: true }, errorInterceptor],

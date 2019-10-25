@@ -4,7 +4,6 @@ import { freeplaceParkResponse } from 'src/app/model/moovhubBack';
 import { parksDataResponse } from 'types/lib';
 import { environment as E } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class allParksService {
