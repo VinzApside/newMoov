@@ -16,7 +16,8 @@ export const initialState: ParkState = {
 export function rechercheReducer(state = initialState, action: fromRecherche.ParksAction) {
     switch (action.type) {
         case fromRecherche.LOAD_PARKS: {
-            console.log(action.payload);
+            const parkList = action.payload;
+            console.log(parkList);
             return { ...state, loading: true };
         }
     }
