@@ -22,7 +22,7 @@ export class RechercheComponent implements OnInit {
     constructor(private store: Store, private toastr: ToastrService, private rechercheService: AllParksService) {}
 
     ngOnInit() {
-        // this.rechercheService.getParks().subscribe((rs) => console.log('rs', rs));
+        // this.rechercheService.getAllParksData().subscribe((rs) => console.log('rs', rs));
         this.store.dispatch(new InitialiseParks());
     }
 

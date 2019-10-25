@@ -31,7 +31,7 @@ export class AllParksService {
     //     (err) => console.log('+++')
     // );
 
-    getParks(): Observable<parksDataResponse> {
+    getAllParksData(): Observable<parksDataResponse> {
         return this.http.get<parksDataResponse>(this.urlParkData, this.httpOptions);
     }
 
@@ -57,8 +57,8 @@ export class AllParksService {
     }
 
     getAllData(): Observable<any> {
-        return forkJoin(this.getFreePlaces(), this.getParks()).pipe(
-            map(([parksGeneralData, parksFreeplaces]) => {
+        return forkJoin(this.getFreePlaces(), this.getAllParksData()).pipe(
+            tap(([parksGeneralData, parksFreeplaces]) => {
                 const parksAllDataConcat = [];
                 for (const park of parksGeneralData) {
                     if (park.status === 'active') {
@@ -71,7 +71,6 @@ export class AllParksService {
                         parksAllDataConcat.push(park);
                     }
                 }
-                return parksAllDataConcat;
             })
         );
     }

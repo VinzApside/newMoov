@@ -14,6 +14,10 @@ export interface freeplaceParkResponse {
     is_updated: number;
     origin: string;
     price: number;
+    find(
+        predicate: (value: freeplaceParkResponse, index: number, obj: Array<freeplaceParkResponse>) => boolean,
+        thisArg?: any
+    ): freeplaceParkResponse | undefined;
 }
 
 export interface parksDataResponse {
